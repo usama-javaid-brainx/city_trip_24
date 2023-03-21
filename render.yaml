@@ -1,0 +1,18 @@
+databases:
+  - name: city_trip_24_postgres
+    databaseName: city_trip_24_production
+    user: brainx
+
+services:
+  - type: web
+    name: city-trip-24
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: city-trip-24
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
