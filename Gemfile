@@ -63,3 +63,7 @@ group :development do
   # gem "spring"
 end
 
+# for location
+gem 'geocoder'
+# for pagination
+gem 'pagy', '~> 6.0', '>= 6.0.2'

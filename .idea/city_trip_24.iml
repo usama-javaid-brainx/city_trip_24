@@ -42,12 +42,13 @@
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.16.0, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-3.2.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.22, RVM: ruby-3.2.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.6, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.2.2, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cssbundling-rails (v1.1.2, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.7.1, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.12.0, RVM: ruby-3.2.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="geocoder (v1.8.1, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.1.0, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.12.0, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.5, RVM: ruby-3.2.1) [gem]" level="application" />
@@ -64,6 +65,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.3.3, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.14.2, RVM: ruby-3.2.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pagy (v6.0.2, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.4.6, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="propshaft (v0.7.0, RVM: ruby-3.2.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.5, RVM: ruby-3.2.1) [gem]" level="application" />
@@ -100,6 +102,9 @@
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
+        <option value="geocoder:config" />
+        <option value="geocoder:maxmind:geolite_city" />
+        <option value="geocoder:maxmind:geolite_country" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -138,6 +143,9 @@
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
+        <option value="geocoder:config" />
+        <option value="geocoder:maxmind:geolite_city" />
+        <option value="geocoder:maxmind:geolite_country" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -363,6 +371,27 @@
                 </subtasks>
               </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:truncate_all" id="truncate_all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="geocode">
+            <subtasks>
+              <RakeTaskImpl description="Geocode all objects without coordinates" fullCommand="geocode:all" id="all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="geocoder">
+            <subtasks>
+              <RakeTaskImpl id="maxmind">
+                <subtasks>
+                  <RakeTaskImpl id="geolite">
+                    <subtasks>
+                      <RakeTaskImpl description="Download MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:download" id="download" />
+                      <RakeTaskImpl description="Extract (unzip) MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:extract" id="extract" />
+                      <RakeTaskImpl description="Load/refresh MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:insert" id="insert" />
+                      <RakeTaskImpl description="Download and load/refresh MaxMind GeoLite City data" fullCommand="geocoder:maxmind:geolite:load" id="load" />
+                    </subtasks>
+                  </RakeTaskImpl>
+                </subtasks>
+              </RakeTaskImpl>
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="javascript">

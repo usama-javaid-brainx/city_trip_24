@@ -1,0 +1,65 @@
+<% category_id = location_category(@location) %>
+<%= form_with model: @location, html: { "data-controller": 'location', "data-location-sub-category-url-value": selected_sub_categories_path, "data-location-coordinates-url-value": coordinates_address_locations_path } do |form| %>
+  <div>
+    <%= form.label :name, 'Location Name', class: "form-label" %>
+    <%= form.text_field :name, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :category, 'Category', class: "form-label" %>
+    <%= form.select(:category, options_for_select(available_categories, selected: category_id), { include_blank: false }, { class: "form-control form-select", "data-location-target": 'categorySelect', "data-action": "change->location#fetchSubcategories" }) %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :sub_category_id, 'Sub Category', class: "form-label" %>
+    <%= form.select(:sub_category_id, options_for_select(available_sub_categories(category_id), selected: location_sub_category(@location, category_id)), { include_blank: "false" }, { class: "form-control form-select", "data-location-target": 'subCategorySelect' }) %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :address, 'Location (Complete address in 1 click)', class: "form-label" %>
+    <%= form.text_field :address, required: false, class: "form-control d-none", "data-location-target": "addressField" %>
+    <div>
+      <button class="btn btn-success" type="button" data-action="click->location#fetchCurrentCoordinates" data-location-target="addressBtn">
+        <i class='fas fa-map-marker-alt' style='font-size:18px;color:white'></i>
+        Insert this location
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :street, 'Street', class: "form-label" %>
+    <%= form.text_field :street, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :number, 'Number', class: "form-label" %>
+    <%= form.text_field :street, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :postal_code, 'Postal Code', class: "form-label" %>
+    <%= form.text_field :postal_code, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :city, 'City', class: "form-label" %>
+    <%= form.text_field :city, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :country, 'Country', class: "form-label" %>
+    <%= form.text_field :country, required: false, class: "form-control" %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :images, 'Images', class: "form-label" %>
+    <%= form.file_field :images, multiple: true, required: false, class: "form-control" %>
+  </div>
+  <% location_data_attributes.each do |key, value| %>
+    <div class="mt-2">
+      <%= form.label "data[#{key}]", value, class: "form-label" %>
+      <%= form.text_field "data[#{key}]", value: @location.persisted? ? @location.data['key'] : '', required: false, class: "form-control" %>
+    </div>
+  <% end %>
+  <%= form.submit "Add Location", class: "btn btn-primary w-100 mb-2 mt-4 p-2" %>
+<% end %>
