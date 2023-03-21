@@ -7,7 +7,6 @@ services:
   - type: web
     name: city-trip-24
     env: ruby
-    rootDir: city_trip_24
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
