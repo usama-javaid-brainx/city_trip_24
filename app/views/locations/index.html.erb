@@ -9,17 +9,17 @@
         <thead>
         <tr>
           <th scope="col">Sr.No</th>
-          <th scope="col">Category</th>
-          <th scope="col">Sub Category</th>
-          <th scope="col">Name</th>
-          <th scope="col">Country</th>
-          <th scope="col">Address</th>
-          <th scope="col">City</th>
-          <th scope="col">Street</th>
-          <th scope="col">Number</th>
-          <th scope="col">Postal Code</th>
+          <th scope="col" class="small-th">Category</th>
+          <th scope="col" class="small-th">Sub Category</th>
+          <th scope="col" class="large-th">Name</th>
+          <th scope="col" class="small-th">Country</th>
+          <th scope="col" class="large-th">Address</th>
+          <th scope="col" class="small-th">City</th>
+          <th scope="col" class="small-th">Street</th>
+          <th scope="col" class="small-th">Number</th>
+          <th scope="col" class="small-th">Postal Code</th>
           <% location_data_attributes.each do |key, value| %>
-            <th scope="col"><%= value %></th>
+            <th scope="col" class="large-th"><%= value %></th>
           <% end %>
         </tr>
         </thead>
@@ -27,8 +27,8 @@
         <% @locations.each_with_index do |location, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
-            <td><%= location.sub_category.category.name %></td>
-            <td><%= location.sub_category.name %></td>
+            <td><%= location.sub_category.category.name.titleize %></td>
+            <td><%= location.sub_category.name.titleize %></td>
             <td><%= location.name %></td>
             <td><%= country_name(location.country) %></td>
             <td><%= location.address %></td>
@@ -37,8 +37,17 @@
             <td><%= location.number %></td>
             <td><%= location.postal_code %></td>
             <% location_data_attributes.each do |key, value| %>
-              <td><%= location.data[key] %></td>
+              <td><%= location.data[key.to_s] %></td>
             <% end %>
+            <td>
+              <div class="dropdown">
+                <i class="bi bi-three-dots-vertical" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><%= link_to 'Edit', edit_location_path(location), class: 'dropdown-item text-info' %></li>
+                  <li><%= link_to 'Delete', location_path(location), class: 'dropdown-item text-danger', data: { turbo_method: :delete } %></li>
+                </ul>
+              </div>
+            </td>
           </tr>
         <% end %>
         </tbody>

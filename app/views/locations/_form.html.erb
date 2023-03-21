@@ -58,8 +58,8 @@
   <% location_data_attributes.each do |key, value| %>
     <div class="mt-2">
       <%= form.label "data[#{key}]", value, class: "form-label" %>
-      <%= form.text_field "data[#{key}]", value: @location.persisted? ? @location.data['key'] : '', required: false, class: "form-control" %>
+      <%= form.text_field "data[#{key}]", value: @location.persisted? ? @location.data[key.to_s] : '', required: false, class: "form-control" %>
     </div>
   <% end %>
-  <%= form.submit "Add Location", class: "btn btn-primary w-100 mb-2 mt-4 p-2" %>
+  <%= form.submit @location.persisted? ? 'Update Location' : "Add Location", class: "btn btn-primary w-100 mb-2 mt-4 p-2" %>
 <% end %>
