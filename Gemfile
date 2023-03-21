@@ -67,3 +67,4 @@ end
 gem 'geocoder'
 # for pagination
 gem 'pagy', '~> 6.0', '>= 6.0.2'
+gem 'country_select', '~> 8.0'

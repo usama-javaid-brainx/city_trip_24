@@ -1,6 +1,12 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  # (usually English) name if no translation is available
+  def country_name(country_code)
+    country = ISO3166::Country[country_code]
+    country.present? ? (country.common_name || country.iso_short_name) : ''
+  end
+
   def available_categories
     Category.all.map do |category|
       [category.name.titleize, category.id]

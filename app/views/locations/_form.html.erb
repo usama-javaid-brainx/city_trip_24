@@ -12,7 +12,7 @@
 
   <div class="mt-2">
     <%= form.label :sub_category_id, 'Sub Category', class: "form-label" %>
-    <%= form.select(:sub_category_id, options_for_select(available_sub_categories(category_id), selected: location_sub_category(@location, category_id)), { include_blank: "false" }, { class: "form-control form-select", "data-location-target": 'subCategorySelect' }) %>
+    <%= form.select(:sub_category_id, options_for_select(available_sub_categories(category_id), selected: location_sub_category(@location, category_id)), { include_blank: false }, { class: "form-control form-select", "data-location-target": 'subCategorySelect' }) %>
   </div>
 
   <div class="mt-2">
@@ -48,7 +48,7 @@
 
   <div class="mt-2">
     <%= form.label :country, 'Country', class: "form-label" %>
-    <%= form.text_field :country, required: false, class: "form-control" %>
+    <%= form.country_select :country, { include_blank: false }, { class: "form-control form-select" } %>
   </div>
 
   <div class="mt-2">
