@@ -3,8 +3,8 @@ require 'pagy/extras/bootstrap'
 
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all.order(id: :desc)
-    @pagy, @locations = pagy(@locations, items: 20)
+    # @locations = Location.all.order(id: :desc)
+    # @pagy, @locations = pagy(@locations, items: 20)
   end
 
   def new
