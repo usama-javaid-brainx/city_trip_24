@@ -17,7 +17,7 @@
 
   <div class="mt-2">
     <%= form.label :address, 'Location (Complete address in 1 click)', class: "form-label" %>
-    <%= form.text_field :address, required: false, class: "form-control d-none", "data-location-target": "addressField" %>
+    <%= form.text_field :address, required: false, value: @location.address.present? ? @location.address : '', class: "form-control mb-2 #{'d-none' if @location.address.blank?}", "data-location-target": "addressField" %>
     <div>
       <button class="btn btn-success" type="button" data-action="click->location#fetchCurrentCoordinates" data-location-target="addressBtn">
         <i class='fas fa-map-marker-alt' style='font-size:18px;color:white'></i>
